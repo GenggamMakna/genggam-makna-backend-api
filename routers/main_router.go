@@ -18,4 +18,10 @@ func CompRouter(api *gin.RouterGroup) {
 	compHandler := handlers.NewCompHandlers(compService)
 
 	api.GET("/ping", compHandler.Ping)
+
+	authRoute := api.Group("/user")
+	authRoute.Use(middleware.AuthMiddleware())
+	{
+		authRoute.GET("/auth-test", compHandler.AuthTest)
+	}
 }

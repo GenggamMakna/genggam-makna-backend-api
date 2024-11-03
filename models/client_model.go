@@ -2,16 +2,6 @@ package models
 
 import "gorm.io/gorm"
 
-type Users struct {
-	gorm.Model
-	Email     string
-	Username  string
-	Password  string
-	FirstName string
-	LastName  string
-	Contact   string
-}
-
 type Client struct {
 	gorm.Model
 	IP        string
