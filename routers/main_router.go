@@ -19,7 +19,7 @@ func CompRouter(api *gin.RouterGroup) {
 
 	api.GET("/ping", compHandler.Ping)
 
-	authRoute := api.Group("/user")
+	authRoute := api.Group("/auth")
 	{
 		authRoute.POST("/register", compHandler.RegisterUserCredential)
 		authRoute.POST("/login", compHandler.LoginUserCredentials)
