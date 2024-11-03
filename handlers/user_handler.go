@@ -31,15 +31,21 @@ func (h *compHandlers) RegisterUserCredential(c *gin.Context) {
 }
 
 func (h *compHandlers) LoginUserCredentials(c *gin.Context) {
-	email := c.Request.FormValue("email")
-	password := c.Request.FormValue("password")
 
-	if email == "" || password == "" {
-		c.JSON(http.StatusBadRequest, dto.Response{Status: http.StatusBadRequest, Error: "username or password required"})
+	type Credentials struct {
+		Email    string `form:"email" binding:"required"`
+		Password string `form:"password" binding:"required"`
+	}
+
+	var data Credentials
+
+	err := c.ShouldBindJSON(&data)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.Response{Status: http.StatusBadRequest, Error: err.Error()})
 		return
 	}
 
-	token, err := h.service.LoginUserCredentials(email, password)
+	token, err := h.service.LoginUserCredentials(data.Email, data.Password)
 	if err != nil {
 		if err.Error() == "401" {
 			c.JSON(http.StatusUnauthorized, dto.Response{Status: http.StatusUnauthorized, Error: "invalid email or password"})
