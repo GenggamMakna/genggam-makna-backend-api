@@ -1,8 +1,10 @@
 package repositories
 
 import (
+	"errors"
 	"genggam-makna-api/dto"
 	"genggam-makna-api/models"
+	"strings"
 )
 
 func (r *compRepository) RegisterUserCredential(data dto.User) (string, error) {
@@ -15,6 +17,9 @@ func (r *compRepository) RegisterUserCredential(data dto.User) (string, error) {
 
 	result := r.DB.Create(&user_data)
 	if result.Error != nil {
+		if strings.Contains(result.Error.Error(), "duplicate key") {
+			return "", errors.New("409")
+		}
 		return "", result.Error
 	}
 

@@ -23,8 +23,13 @@ func (h *compHandlers) RegisterUserCredential(c *gin.Context) {
 
 	token, err := h.service.RegisterUserCredential(data)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
-		return
+		if err.Error() == "409" {
+			c.JSON(http.StatusConflict, dto.Response{Status: http.StatusConflict, Error: "email already exists, please login"})
+			return
+		} else {
+			c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
+			return
+		}
 	}
 
 	c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Message: "successfully register user", Body: token})
