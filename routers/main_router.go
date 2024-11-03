@@ -20,8 +20,13 @@ func CompRouter(api *gin.RouterGroup) {
 	api.GET("/ping", compHandler.Ping)
 
 	authRoute := api.Group("/user")
+	{
+		authRoute.POST("/register", compHandler.RegisterUserCredential)
+	}
+
 	authRoute.Use(middleware.AuthMiddleware())
 	{
 		authRoute.GET("/auth-test", compHandler.AuthTest)
 	}
+
 }

@@ -9,7 +9,7 @@ import (
 func main() {
 	db := config.InitDB()
 
-	err := db.AutoMigrate(&models.Client{})
+	err := db.AutoMigrate(&models.Client{}, &models.Users{})
 	if err != nil {
 		panic("failed to migrate database: " + err.Error())
 	}

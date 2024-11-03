@@ -1,8 +1,13 @@
 package services
 
-import "genggam-makna-api/repositories"
+import (
+	"genggam-makna-api/dto"
+	"genggam-makna-api/repositories"
+)
 
-type CompService interface{}
+type CompService interface{
+	RegisterUserCredential(data dto.User) (*string, error)
+}
 
 type compServices struct {
 	repo repositories.CompRepository

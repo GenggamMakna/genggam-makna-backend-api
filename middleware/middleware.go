@@ -53,12 +53,10 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 
 		user := dto.User{
-			ID:        int64(claims["id"].(float64)),
+			ID:        claims["id"].(string),
 			Email:     claims["email"].(string),
-			Username:  claims["username"].(string),
 			FirstName: claims["first_name"].(string),
 			LastName:  claims["last_name"].(string),
-			Contact:   claims["contact"].(string),
 		}
 
 		c.Set("user", user)
@@ -86,13 +84,13 @@ func ClientTracker(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		data := models.Client{
-			IP: clientIP,
+			IP:      clientIP,
 			Browser: name,
 			Version: version,
-			OS: ua.OS(),
-			Device: ua.Platform(),
-			Origin: referer,
-			API: fullURL.String(),
+			OS:      ua.OS(),
+			Device:  ua.Platform(),
+			Origin:  referer,
+			API:     fullURL.String(),
 		}
 
 		result := db.Create(&data)

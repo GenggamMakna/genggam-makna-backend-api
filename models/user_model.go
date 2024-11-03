@@ -7,11 +7,10 @@ import (
 
 type Users struct {
 	gorm.Model
-	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
-	Email     string
-	Username  string
-	Password  string
-	FirstName string
-	LastName  string
-	Contact   string
+	ID          uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
+	Email       string
+	Password    string
+	FirstName   string
+	LastName    string
+	GoogleToken string
 }
