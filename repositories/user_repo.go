@@ -20,3 +20,13 @@ func (r *compRepository) RegisterUserCredential(data dto.User) (string, error) {
 
 	return user_data.ID.String(), nil
 }
+
+func (r *compRepository) LoginUserCredentials(email string) (*models.Users, error) {
+	var user_data models.Users
+	result := r.DB.Where("email = ?", email).First(&user_data)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &user_data, nil
+}

@@ -3,12 +3,14 @@ package repositories
 import (
 	"genggam-makna-api/config"
 	"genggam-makna-api/dto"
+	"genggam-makna-api/models"
 
 	"gorm.io/gorm"
 )
 
 type CompRepository interface {
 	RegisterUserCredential(data dto.User) (string, error)
+	LoginUserCredentials(email string) (*models.Users, error)
 }
 
 type compRepository struct {

@@ -22,6 +22,7 @@ func CompRouter(api *gin.RouterGroup) {
 	authRoute := api.Group("/user")
 	{
 		authRoute.POST("/register", compHandler.RegisterUserCredential)
+		authRoute.POST("/login", compHandler.LoginUserCredentials)
 	}
 
 	authRoute.Use(middleware.AuthMiddleware())
