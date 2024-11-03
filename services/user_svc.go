@@ -45,6 +45,10 @@ func (s *compServices) LoginUserCredentials(email string, password string) (*str
 		return nil, errors.New("404")
 	}
 
+	if data.GoogleToken != "" {
+		return nil, errors.New("403")
+	}
+
 	if data.Password != password {
 		return nil, errors.New("401")
 	}
