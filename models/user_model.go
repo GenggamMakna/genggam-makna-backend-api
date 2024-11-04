@@ -12,5 +12,5 @@ type Users struct {
 	Password    string 
 	FirstName   string `gorm:"not null"`
 	LastName    string `gorm:"not null"`
-	GoogleToken string 
+	GoogleUID 	string 
 }
