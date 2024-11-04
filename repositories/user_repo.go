@@ -5,6 +5,8 @@ import (
 	"genggam-makna-api/dto"
 	"genggam-makna-api/models"
 	"strings"
+
+	"gorm.io/gorm"
 )
 
 func (r *compRepository) RegisterUserCredential(data dto.User) (string, error) {
@@ -34,4 +36,39 @@ func (r *compRepository) LoginUserCredentials(email string) (*models.Users, erro
 	}
 
 	return &user_data, nil
+}
+
+func (r *compRepository) LoginUserGoogle(data dto.User) (string, error) {
+	var existingUser models.Users
+
+	err := r.DB.Where("email = ?", data.Email).First(&existingUser).Error
+	if err == nil {
+		if existingUser.GoogleUID != "" {
+			if existingUser.GoogleUID != data.GoogleUID {
+				return "", errors.New("401")
+			}
+		} else if existingUser.Password != "" {
+			existingUser.GoogleUID = data.GoogleUID
+			if err := r.DB.Save(&existingUser).Error; err != nil {
+				return "", err
+			}
+		}
+		return existingUser.ID.String(), nil
+	} else if !errors.Is(err, gorm.ErrRecordNotFound) {
+		return "", err
+	}
+
+	userData := models.Users{
+		Email:     data.Email,
+		FirstName: data.FirstName,
+		LastName:  data.LastName,
+		GoogleUID: data.GoogleUID,
+	}
+
+	result := r.DB.Create(&userData)
+	if result.Error != nil {
+		return "", result.Error
+	}
+
+	return userData.ID.String(), nil
 }

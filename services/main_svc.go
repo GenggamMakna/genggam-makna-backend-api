@@ -8,6 +8,7 @@ import (
 type CompService interface{
 	RegisterUserCredential(data dto.User) (*string, error)
 	LoginUserCredentials(email string, password string) (*string, error)
+	LoginUserGoogle(data dto.User) (*string, error)
 }
 
 type compServices struct {

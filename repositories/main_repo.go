@@ -11,6 +11,7 @@ import (
 type CompRepository interface {
 	RegisterUserCredential(data dto.User) (string, error)
 	LoginUserCredentials(email string) (*models.Users, error)
+	LoginUserGoogle(data dto.User) (string, error)
 }
 
 type compRepository struct {

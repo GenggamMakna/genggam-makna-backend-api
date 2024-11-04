@@ -23,6 +23,11 @@ func CompRouter(api *gin.RouterGroup) {
 	{
 		authRoute.POST("/register", compHandler.RegisterUserCredential)
 		authRoute.POST("/login", compHandler.LoginUserCredentials)
+		
+		googleRoute := authRoute.Group("/google")
+		{
+			googleRoute.POST("/login", compHandler.LoginUserGoogle)
+		}
 	}
 
 	authRoute.Use(middleware.AuthMiddleware())
