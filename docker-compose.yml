@@ -1,0 +1,22 @@
+services:
+  genggam-makna-api:
+    image: "${DOCKER_USERNAME}/genggam-makna-backend-api:v1"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: genggam-makna-backend-api
+    env_file:
+      - /etc/secrets/genggam-makna-backend-api.env
+    ports:
+      - "8001:8001"
+    networks:
+      - nginx
+    volumes:
+      - /etc/secrets:/etc/secrets
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      ["./genggam-makna-backend-api"]
+
+networks:
+  nginx:
+    external: true
