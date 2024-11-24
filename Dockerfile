@@ -7,7 +7,7 @@ RUN go mod download
 
 COPY . ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /genggam-makna-api
+RUN CGO_ENABLED=0 GOOS=linux go build -o /genggam-makna-backend-api
 
 # Run the tests in the container
 FROM build-stage AS run-test-stage
@@ -15,8 +15,8 @@ RUN go test -v ./...
 
 WORKDIR /
 
-COPY --from=build-stage /genggam-makna-api /genggam-makna-api
+COPY --from=build-stage /genggam-makna-backend-api /genggam-makna-backend-api
 
 EXPOSE 8001
 
-ENTRYPOINT ["/genggam-makna-api"]
+ENTRYPOINT ["/genggam-makna-backend-api"]
