@@ -39,6 +39,7 @@ func CompRouter(api *gin.RouterGroup) {
 	predictRoute.Use(middleware.AuthMiddleware())
 	{
 		predictRoute.POST("/image", compHandler.ImagePredict)
+		predictRoute.POST("/video", compHandler.VideoPredict)
 	}
 
 }

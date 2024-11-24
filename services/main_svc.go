@@ -11,6 +11,7 @@ type CompService interface{
 	LoginUserGoogle(data dto.User) (*string, error)
 
 	ImagePredict(image_data []byte) (string, error)
+	VideoPredict(video_data []byte) (string, error)
 }
 
 type compServices struct {
