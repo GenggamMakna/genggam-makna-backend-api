@@ -38,66 +38,66 @@ jobs:
 
       - name: Save the private key as a temporary file
         run: |
-          echo "${{ secrets.VPS_SSH_KEY }}" > private_key
+          echo "${{ secrets.VM_SSH_KEY }}" > private_key
           chmod 600 private_key
 
       - name: Copy docker-compose.yml to VPS
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          scp -o StrictHostKeyChecking=no -i private_key docker-compose.yml ${VPS_USER}@${VPS_HOST}:/etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml
+          scp -o StrictHostKeyChecking=no -i private_key docker-compose.yml ${VM_USER}@${VM_HOST}:/etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml
 
       - name: Copy Dockerfile to VPS
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          scp -o StrictHostKeyChecking=no -i private_key Dockerfile ${VPS_USER}@${VPS_HOST}:/etc/ci-cd/genggam-makna-backend-apis/Dockerfile
+          scp -o StrictHostKeyChecking=no -i private_key Dockerfile ${VM_USER}@${VM_HOST}:/etc/ci-cd/genggam-makna-backend-apis/Dockerfile
 
       - name: Copy go.mod, go.sum to VPS
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          scp -o StrictHostKeyChecking=no -i private_key go.mod ${VPS_USER}@${VPS_HOST}:/etc/ci-cd/genggam-makna-backend-apis/go.mod
-          scp -o StrictHostKeyChecking=no -i private_key go.sum ${VPS_USER}@${VPS_HOST}:/etc/ci-cd/genggam-makna-backend-apis/go.sum
+          scp -o StrictHostKeyChecking=no -i private_key go.mod ${VM_USER}@${VM_HOST}:/etc/ci-cd/genggam-makna-backend-apis/go.mod
+          scp -o StrictHostKeyChecking=no -i private_key go.sum ${VM_USER}@${VM_HOST}:/etc/ci-cd/genggam-makna-backend-apis/go.sum
 
       - name: Stop existing containers on the server
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VPS_USER}@${VPS_HOST} 'docker-compose -f /etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml down'
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} 'docker-compose -f /etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml down'
 
       - name: Delete old containers on server
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VPS_USER}@${VPS_HOST} '
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} '
             docker ps -a -q -f "name=genggam-makna-backend-api" | xargs -r docker rm
           '
 
 #      - name: Delete old images on server
 #        env:
-#          VPS_USER: ${{ secrets.VPS_USER }}
-#          VPS_HOST: ${{ secrets.VPS_HOST }}
+#          VM_USER: ${{ secrets.VM_USER }}
+#          VM_HOST: ${{ secrets.VM_HOST }}
 #        run: |
-#          ssh -o StrictHostKeyChecking=no -i private_key ${VPS_USER}@${VPS_HOST} '
+#          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} '
 #            docker rmi -f ${{ secrets.DOCKER_USERNAME }}/genggam-makna-backend-api:v1 || true
 #          '
 
       - name: Run SSH commands to update and run Docker Compose on VPS
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VPS_USER}@${VPS_HOST} 'DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} docker-compose -f /etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml up -d --force-recreate --remove-orphans'
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} 'DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} docker-compose -f /etc/ci-cd/genggam-makna-backend-apis/docker-compose.yml up -d --force-recreate --remove-orphans'
 
       - name: Check container status
         env:
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VPS_USER}@${VPS_HOST} 'docker ps'
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} 'docker ps'

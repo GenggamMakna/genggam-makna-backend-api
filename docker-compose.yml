@@ -1,6 +1,6 @@
 services:
   genggam-makna-api:
-    image: "${DOCKER_USERNAME}/genggam-makna-backend-api:v1"
+    image: "vinssdroid/genggam-makna-backend-api:v1"
     build:
       context: .
       dockerfile: Dockerfile
