@@ -6,3 +6,9 @@ type Response struct {
 	Body    interface{} `json:"body,omitempty"`
 	Error   string      `json:"error,omitempty"`
 }
+
+type MLResponse struct {
+	Confidence        float64 `json:"confidence,omitempty"`
+	PredictedAlphabet string  `json:"predicted_alphabet,omitempty"`
+	Error             string  `json:"error,omitempty"`
+}
