@@ -30,7 +30,7 @@ func DownScaleImage(imageData []byte) ([]byte, error) {
 		return nil, fmt.Errorf("error decoding image: %w", err)
 	}
 
-	resizedImg := resize.Resize(244, 244, img, resize.Lanczos3)
+	resizedImg := resize.Resize(256, 0, img, resize.Lanczos3)
 
 	var buffer bytes.Buffer
 	err = png.Encode(&buffer, resizedImg)
