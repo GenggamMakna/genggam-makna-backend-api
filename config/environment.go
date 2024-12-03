@@ -8,28 +8,30 @@ import (
 )
 
 type Env struct {
-	DB_USER              string
-	DB_PASSWORD          string
-	DB_HOST              string
-	DB_PORT              string
-	DB_NAME              string
-	PORT                 string
-	JWT_SECRET           string
-	ENVIRONMENT          string
-	PREDICT_BASE_API_URL string
+	DB_USER                        string
+	DB_PASSWORD                    string
+	DB_HOST                        string
+	DB_PORT                        string
+	DB_NAME                        string
+	PORT                           string
+	JWT_SECRET                     string
+	ENVIRONMENT                    string
+	PREDICT_BASE_API_URL           string
+	GOOGLE_APPLICATION_CREDENTIALS string
 }
 
 func InitEnvCheck() {
 	environment := Env{
-		DB_USER:              os.Getenv("DB_USER"),
-		DB_PASSWORD:          os.Getenv("DB_PASSWORD"),
-		DB_HOST:              os.Getenv("DB_HOST"),
-		DB_PORT:              os.Getenv("DB_PORT"),
-		DB_NAME:              os.Getenv("DB_NAME"),
-		PORT:                 os.Getenv("PORT"),
-		JWT_SECRET:           os.Getenv("JWT_SECRET"),
-		ENVIRONMENT:          os.Getenv("ENVIRONMENT"),
-		PREDICT_BASE_API_URL: os.Getenv("PREDICT_BASE_API_URL"),
+		DB_USER:                        os.Getenv("DB_USER"),
+		DB_PASSWORD:                    os.Getenv("DB_PASSWORD"),
+		DB_HOST:                        os.Getenv("DB_HOST"),
+		DB_PORT:                        os.Getenv("DB_PORT"),
+		DB_NAME:                        os.Getenv("DB_NAME"),
+		PORT:                           os.Getenv("PORT"),
+		JWT_SECRET:                     os.Getenv("JWT_SECRET"),
+		ENVIRONMENT:                    os.Getenv("ENVIRONMENT"),
+		PREDICT_BASE_API_URL:           os.Getenv("PREDICT_BASE_API_URL"),
+		GOOGLE_APPLICATION_CREDENTIALS: os.Getenv("GOOGLE_APPLICATION_CREDENTIALS"),
 	}
 
 	isEmpty, emptyFields := checkEmptyFields(environment)
