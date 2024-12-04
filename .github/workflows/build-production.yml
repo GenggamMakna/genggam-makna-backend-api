@@ -78,7 +78,7 @@ jobs:
           VM_USER: ${{ secrets.VM_USER }}
           VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} "sudo docker-compose -f /opt/ci-cd/genggam-makna-backend-apis/docker-compose.yml down"
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} "sudo docker compose -f /opt/ci-cd/genggam-makna-backend-apis/docker-compose.yml down"
 
       - name: Delete old containers on server
         env:
@@ -103,7 +103,7 @@ jobs:
           VM_USER: ${{ secrets.VM_USER }}
           VM_HOST: ${{ secrets.VM_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} sudo docker-compose -f /opt/ci-cd/genggam-makna-backend-apis/docker-compose.yml up -d --force-recreate --remove-orphans"
+          ssh -o StrictHostKeyChecking=no -i private_key ${VM_USER}@${VM_HOST} "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} sudo docker compose -f /opt/ci-cd/genggam-makna-backend-apis/docker-compose.yml up -d --force-recreate --remove-orphans"
 
       - name: Check container status
         env:
