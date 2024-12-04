@@ -32,9 +32,11 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/genggam-makna-backend-api:v1,${{ secrets.DOCKER_USERNAME }}
           file: ./Dockerfile
           no-cache: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/genggam-makna-backend-api:v1
+            ${{ secrets.DOCKER_USERNAME }}/genggam-makna-backend-api:${{ github.sha }}
 
       - name: Save the private key as a temporary file
         run: |
