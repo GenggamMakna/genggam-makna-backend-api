@@ -69,6 +69,11 @@ func (s *compServices) ImagePredict(image_data []byte) (*dto.MLResponse, error) 
 				fmt.Println(result)
 			}
 		}
+
+		err = s.CachePredict(image_data, ml_response)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}()
 
 	return &ml_response, nil
