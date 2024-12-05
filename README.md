@@ -1,5 +1,11 @@
 # Genggam Makna Backend API
 
+[![Go Version](https://img.shields.io/badge/Go-1.22.1-blue)](https://golang.org) [![Gin Framework](https://img.shields.io/badge/Gin-1.10.0-blue)](https://gin-gonic.com/) [![GORM](https://img.shields.io/badge/GORM-ORM-yellow)](https://gorm.io/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)](https://www.postgresql.org/) [![Redis](https://img.shields.io/badge/Redis-7.4.1-red?logo=redis&logoColor=white)](https://redis.io/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
+
+A backend API built with modern technologies to serve the Genggam Makna platform.
+
+---
+
 Genggam Makna Backend API is a backend service designed to handle user requests from the mobile application **Genggam Makna**, an application for translating **SIBI (Indonesian Sign Language System)**. This service authenticates users, forwards requests for image and video predictions to the Machine Learning (ML) service, and leverages a memory store for caching prediction results to minimize ML service usage and improve performance.
 
 ---
