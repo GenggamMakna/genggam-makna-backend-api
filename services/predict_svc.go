@@ -123,5 +123,12 @@ func (s *compServices) VideoPredict(video_data []byte) (*dto.MLResponse, error) 
 		return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 	}
 
+	go func() {
+		err = s.CachePredict(video_data, ml_response)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
+
 	return &ml_response, nil
 }

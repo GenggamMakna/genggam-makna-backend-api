@@ -51,6 +51,12 @@ func (h *compHandlers) VideoPredict(c *gin.Context) {
 		return
 	}
 
+	cached, _ := h.service.GetPredictCache(video_data)
+	if cached != nil {
+		c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Body: cached, Message: "video predicted successfully"})
+		return
+	}
+
 	result, err := h.service.VideoPredict(video_data)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
