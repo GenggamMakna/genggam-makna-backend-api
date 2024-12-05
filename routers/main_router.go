@@ -35,4 +35,11 @@ func CompRouter(api *gin.RouterGroup) {
 		authRoute.GET("/auth-test", compHandler.AuthTest)
 	}
 
+	predictRoute := api.Group("/predict")
+	predictRoute.Use(middleware.AuthMiddleware())
+	{
+		predictRoute.POST("/image", compHandler.ImagePredict)
+		predictRoute.POST("/video", compHandler.VideoPredict)
+	}
+
 }

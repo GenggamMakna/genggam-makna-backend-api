@@ -1,6 +1,7 @@
 package main
 
 import (
+	"genggam-makna-api/config"
 	"genggam-makna-api/routers"
 	"log"
 	"os"
@@ -12,6 +13,7 @@ import (
 
 func main() {
 	godotenv.Load()
+	config.InitEnvCheck()
 
 	port := os.Getenv("PORT")
 	environment := os.Getenv("ENVIRONMENT")
