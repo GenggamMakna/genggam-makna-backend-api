@@ -8,7 +8,7 @@ type Response struct {
 }
 
 type MLResponse struct {
-	Confidence        float64 `json:"confidence,omitempty"`
-	PredictedAlphabet string  `json:"predicted_alphabet,omitempty"`
-	Error             string  `json:"error,omitempty"`
+	Confidence        float64     `json:"confidence,omitempty"`
+	PredictedAlphabet interface{} `json:"predicted_alphabet,omitempty"`
+	Error             string      `json:"error,omitempty"`
 }
