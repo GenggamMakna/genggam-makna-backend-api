@@ -18,6 +18,7 @@ type Env struct {
 	ENVIRONMENT                    string
 	PREDICT_BASE_API_URL           string
 	GOOGLE_APPLICATION_CREDENTIALS string
+	REDIS_ADDRESS                  string
 }
 
 func InitEnvCheck() {
@@ -32,6 +33,7 @@ func InitEnvCheck() {
 		ENVIRONMENT:                    os.Getenv("ENVIRONMENT"),
 		PREDICT_BASE_API_URL:           os.Getenv("PREDICT_BASE_API_URL"),
 		GOOGLE_APPLICATION_CREDENTIALS: os.Getenv("GOOGLE_APPLICATION_CREDENTIALS"),
+		REDIS_ADDRESS:                  os.Getenv("REDIS_ADDRESS"),
 	}
 
 	isEmpty, emptyFields := checkEmptyFields(environment)

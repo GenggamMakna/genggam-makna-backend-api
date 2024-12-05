@@ -12,6 +12,8 @@ type CompService interface{
 
 	ImagePredict(image_data []byte) (*dto.MLResponse, error)
 	VideoPredict(video_data []byte) (string, error)
+
+	GetPredictCache(image []byte) (*dto.MLResponse, error)
 }
 
 type compServices struct {

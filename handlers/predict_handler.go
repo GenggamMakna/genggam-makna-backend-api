@@ -22,6 +22,12 @@ func (h *compHandlers) ImagePredict(c *gin.Context) {
 		return
 	}
 
+	cached, _ := h.service.GetPredictCache(image_data)
+	if cached != nil {
+		c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Body: cached, Message: "image predicted successfully"})
+		return
+	}
+
 	result, err := h.service.ImagePredict(image_data)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
