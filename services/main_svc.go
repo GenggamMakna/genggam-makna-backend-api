@@ -11,7 +11,7 @@ type CompService interface{
 	LoginUserGoogle(data dto.User) (*string, error)
 
 	ImagePredict(image_data []byte) (*dto.MLResponse, error)
-	VideoPredict(video_data []byte) (string, error)
+	VideoPredict(video_data []byte) (*dto.MLResponse, error)
 
 	GetPredictCache(image []byte) (*dto.MLResponse, error)
 }
