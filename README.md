@@ -136,5 +136,3 @@ For further questions or contributions, please contact:
 - **Name**: Rama Diaz
 - **Website**: [xann.my.id](https://xann.my.id)
 - **Email**: ramadiaz221@gmail.com
-
-Feel free to customize the placeholder values (e.g., repository URL, environment variables, email). Let me know if you need further adjustments!
