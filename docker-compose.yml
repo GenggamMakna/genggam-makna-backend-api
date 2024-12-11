@@ -11,6 +11,7 @@ services:
       - "8002:8002"
     networks:
       - nginx-mailcow-host
+      - postgressql-network
     volumes:
       - /etc/secrets:/etc/secrets
     command:
@@ -18,4 +19,6 @@ services:
 
 networks:
   nginx-mailcow-host:
+    external: true
+  postgressql-network:
     external: true
