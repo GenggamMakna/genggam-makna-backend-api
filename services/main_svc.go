@@ -16,7 +16,7 @@ type CompService interface {
 	BISINDOImagePredict(image_data []byte) (*dto.MLResponse, error)
 	BISINDOVideoPredict(video_data []byte) (*dto.MLResponse, error)
 	
-	GetPredictCache(image []byte) (*dto.MLResponse, error)
+	GetPredictCache(image []byte, model_type dto.ModelType) (*dto.MLResponse, error)
 }
 
 type compServices struct {

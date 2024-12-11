@@ -22,7 +22,7 @@ func (h *compHandlers) BISINDOImagePredict(c *gin.Context) {
 		return
 	}
 
-	cached, _ := h.service.GetPredictCache(image_data)
+	cached, _ := h.service.GetPredictCache(image_data, dto.BISINDO)
 	if cached != nil {
 		c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Body: cached, Message: "image predicted successfully"})
 		return
@@ -51,7 +51,7 @@ func (h *compHandlers) BISINDOVideoPredict(c *gin.Context) {
 		return
 	}
 
-	cached, _ := h.service.GetPredictCache(video_data)
+	cached, _ := h.service.GetPredictCache(video_data, dto.BISINDO)
 	if cached != nil {
 		c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Body: cached, Message: "video predicted successfully"})
 		return

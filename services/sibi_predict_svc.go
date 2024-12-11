@@ -70,7 +70,7 @@ func (s *compServices) SIBIImagePredict(image_data []byte) (*dto.MLResponse, err
 			}
 		}
 
-		err = s.CachePredict(image_data, ml_response)
+		err = s.CachePredict(image_data, ml_response, dto.SIBI)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -124,7 +124,7 @@ func (s *compServices) SIBIVideoPredict(video_data []byte) (*dto.MLResponse, err
 	}
 
 	go func() {
-		err = s.CachePredict(video_data, ml_response)
+		err = s.CachePredict(video_data, ml_response, dto.SIBI)
 		if err != nil {
 			fmt.Println(err)
 		}

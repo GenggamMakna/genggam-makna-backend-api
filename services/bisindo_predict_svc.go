@@ -70,7 +70,7 @@ func (s *compServices) BISINDOImagePredict(image_data []byte) (*dto.MLResponse, 
 			}
 		}
 
-		err = s.CachePredict(image_data, ml_response)
+		err = s.CachePredict(image_data, ml_response, dto.BISINDO)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -124,7 +124,7 @@ func (s *compServices) BISINDOVideoPredict(video_data []byte) (*dto.MLResponse, 
 	}
 
 	go func() {
-		err = s.CachePredict(video_data, ml_response)
+		err = s.CachePredict(video_data, ml_response, dto.BISINDO)
 		if err != nil {
 			fmt.Println(err)
 		}
