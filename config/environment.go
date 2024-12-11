@@ -16,7 +16,8 @@ type Env struct {
 	PORT                           string
 	JWT_SECRET                     string
 	ENVIRONMENT                    string
-	PREDICT_BASE_API_URL           string
+	SIBI_BASE_API_URL              string
+	BISINDO_BASE_API_URL           string
 	GOOGLE_APPLICATION_CREDENTIALS string
 	REDIS_ADDRESS                  string
 }
@@ -31,7 +32,8 @@ func InitEnvCheck() {
 		PORT:                           os.Getenv("PORT"),
 		JWT_SECRET:                     os.Getenv("JWT_SECRET"),
 		ENVIRONMENT:                    os.Getenv("ENVIRONMENT"),
-		PREDICT_BASE_API_URL:           os.Getenv("PREDICT_BASE_API_URL"),
+		SIBI_BASE_API_URL:              os.Getenv("SIBI_BASE_API_URL"),
+		BISINDO_BASE_API_URL:           os.Getenv("BISINDO_BASE_API_URL"),
 		GOOGLE_APPLICATION_CREDENTIALS: os.Getenv("GOOGLE_APPLICATION_CREDENTIALS"),
 		REDIS_ADDRESS:                  os.Getenv("REDIS_ADDRESS"),
 	}

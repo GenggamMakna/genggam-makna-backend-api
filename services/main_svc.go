@@ -5,14 +5,17 @@ import (
 	"genggam-makna-api/repositories"
 )
 
-type CompService interface{
+type CompService interface {
 	RegisterUserCredential(data dto.User) (*string, error)
 	LoginUserCredentials(email string, password string) (*string, error)
 	LoginUserGoogle(data dto.User) (*string, error)
 
-	ImagePredict(image_data []byte) (*dto.MLResponse, error)
-	VideoPredict(video_data []byte) (*dto.MLResponse, error)
-
+	SIBIImagePredict(image_data []byte) (*dto.MLResponse, error)
+	SIBIVideoPredict(video_data []byte) (*dto.MLResponse, error)
+	
+	BISINDOImagePredict(image_data []byte) (*dto.MLResponse, error)
+	BISINDOVideoPredict(video_data []byte) (*dto.MLResponse, error)
+	
 	GetPredictCache(image []byte) (*dto.MLResponse, error)
 }
 

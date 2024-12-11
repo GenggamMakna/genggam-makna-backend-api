@@ -23,7 +23,7 @@ func CompRouter(api *gin.RouterGroup) {
 	{
 		authRoute.POST("/register", compHandler.RegisterUserCredential)
 		authRoute.POST("/login", compHandler.LoginUserCredentials)
-		
+
 		googleRoute := authRoute.Group("/google")
 		{
 			googleRoute.POST("/login", compHandler.LoginUserGoogle)
@@ -38,8 +38,16 @@ func CompRouter(api *gin.RouterGroup) {
 	predictRoute := api.Group("/predict")
 	predictRoute.Use(middleware.AuthMiddleware())
 	{
-		predictRoute.POST("/image", compHandler.ImagePredict)
-		predictRoute.POST("/video", compHandler.VideoPredict)
-	}
+		sibiRoute := predictRoute.Group("/sibi")
+		{
+			sibiRoute.POST("/image", compHandler.SIBIImagePredict)
+			sibiRoute.POST("/video", compHandler.SIBIVideoPredict)
+		}
 
+		bisindoRoute := predictRoute.Group("/bisindo")
+		{
+			bisindoRoute.POST("/image", compHandler.BISINDOImagePredict)
+			bisindoRoute.POST("/video", compHandler.BISINDOVideoPredict)
+		}
+	}
 }

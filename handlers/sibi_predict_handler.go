@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (h *compHandlers) ImagePredict(c *gin.Context) {
+func (h *compHandlers) SIBIImagePredict(c *gin.Context) {
 	file, _, err := c.Request.FormFile("image")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.Response{Status: http.StatusBadRequest, Error: "image required"})
@@ -28,7 +28,7 @@ func (h *compHandlers) ImagePredict(c *gin.Context) {
 		return
 	}
 
-	result, err := h.service.ImagePredict(image_data)
+	result, err := h.service.SIBIImagePredict(image_data)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
 		return
@@ -37,7 +37,7 @@ func (h *compHandlers) ImagePredict(c *gin.Context) {
 	c.JSON(http.StatusOK, dto.Response{Status: http.StatusOK, Body: result, Message: "image predicted successfully"})
 }
 
-func (h *compHandlers) VideoPredict(c *gin.Context) {
+func (h *compHandlers) SIBIVideoPredict(c *gin.Context) {
 	file, _, err := c.Request.FormFile("video")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.Response{Status: http.StatusBadRequest, Error: "video required"})
@@ -57,7 +57,7 @@ func (h *compHandlers) VideoPredict(c *gin.Context) {
 		return
 	}
 
-	result, err := h.service.VideoPredict(video_data)
+	result, err := h.service.SIBIVideoPredict(video_data)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dto.Response{Status: http.StatusInternalServerError, Error: err.Error()})
 		return

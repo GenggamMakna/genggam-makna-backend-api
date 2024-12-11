@@ -12,8 +12,8 @@ import (
 	"os"
 )
 
-func (s *compServices) ImagePredict(image_data []byte) (*dto.MLResponse, error) {
-	predict_endpoint := os.Getenv("PREDICT_BASE_API_URL") + "/image"
+func (s *compServices) BISINDOImagePredict(image_data []byte) (*dto.MLResponse, error) {
+	predict_endpoint := os.Getenv("BISINDO_BASE_API_URL") + "/image"
 
 	var buf bytes.Buffer
 	writer := multipart.NewWriter(&buf)
@@ -79,8 +79,8 @@ func (s *compServices) ImagePredict(image_data []byte) (*dto.MLResponse, error) 
 	return &ml_response, nil
 }
 
-func (s *compServices) VideoPredict(video_data []byte) (*dto.MLResponse, error) {
-	predict_endpoint := os.Getenv("PREDICT_BASE_API_URL") + "/video"
+func (s *compServices) BISINDOVideoPredict(video_data []byte) (*dto.MLResponse, error) {
+	predict_endpoint := os.Getenv("BISINDO_BASE_API_URL") + "/video"
 
 	var buf bytes.Buffer
 	writer := multipart.NewWriter(&buf)
