@@ -6,13 +6,13 @@ services:
       dockerfile: Dockerfile
     container_name: genggam-makna-backend-api
     env_file:
-      - /opt/secrets/genggam-makna-backend-api.env
+      - /etc/secrets/genggam-makna-backend-api.env
     ports:
-      - "8001:8001"
+      - "8002:8002"
     networks:
       - nginx
     volumes:
-      - /opt/secrets:/opt/secrets
+      - /etc/secrets:/etc/secrets
     command:
       ["./genggam-makna-backend-api"]
 

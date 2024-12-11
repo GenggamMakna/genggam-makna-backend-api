@@ -17,6 +17,6 @@ WORKDIR /
 
 COPY --from=build-stage /genggam-makna-backend-api /genggam-makna-backend-api
 
-EXPOSE 8001
+EXPOSE 8002
 
 ENTRYPOINT ["/genggam-makna-backend-api"]
