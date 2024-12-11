@@ -10,12 +10,12 @@ services:
     ports:
       - "8002:8002"
     networks:
-      - nginx
+      - nginx-mailcow-host
     volumes:
       - /etc/secrets:/etc/secrets
     command:
       ["./genggam-makna-backend-api"]
 
 networks:
-  nginx:
+  nginx-mailcow-host:
     external: true
