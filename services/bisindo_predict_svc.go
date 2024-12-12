@@ -12,8 +12,8 @@ import (
 	"os"
 )
 
-func (s *compServices) ImagePredict(image_data []byte) (*dto.MLResponse, error) {
-	predict_endpoint := os.Getenv("PREDICT_BASE_API_URL") + "/image"
+func (s *compServices) BISINDOImagePredict(image_data []byte) (*dto.MLResponse, error) {
+	predict_endpoint := os.Getenv("BISINDO_BASE_API_URL") + "/image"
 
 	var buf bytes.Buffer
 	writer := multipart.NewWriter(&buf)
@@ -69,13 +69,18 @@ func (s *compServices) ImagePredict(image_data []byte) (*dto.MLResponse, error) 
 				fmt.Println(result)
 			}
 		}
+
+		err = s.CachePredict(image_data, ml_response, dto.BISINDO)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}()
 
 	return &ml_response, nil
 }
 
-func (s *compServices) VideoPredict(video_data []byte) (*dto.MLResponse, error) {
-	predict_endpoint := os.Getenv("PREDICT_BASE_API_URL") + "/video"
+func (s *compServices) BISINDOVideoPredict(video_data []byte) (*dto.MLResponse, error) {
+	predict_endpoint := os.Getenv("BISINDO_BASE_API_URL") + "/video"
 
 	var buf bytes.Buffer
 	writer := multipart.NewWriter(&buf)
@@ -117,6 +122,13 @@ func (s *compServices) VideoPredict(video_data []byte) (*dto.MLResponse, error) 
 	if err := json.Unmarshal(body, &ml_response); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 	}
+
+	go func() {
+		err = s.CachePredict(video_data, ml_response, dto.BISINDO)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 
 	return &ml_response, nil
 }
